@@ -1,6 +1,7 @@
-package com.example.supcrowdfunder;
+package com.supinfo.supcrowdfunder.activities;
 
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.supinfo.supcrowdfunder.R;
 import com.supinfo.supcrowdfunder.entity.Project;
 
 import android.os.Bundle;
@@ -35,12 +37,12 @@ public class MainActivity extends Activity {
 		
 		Project project = new Project();
 		
-		listViewProjects = (ListView)findViewById(R.id.listViewProjects);
-
-	    //t.setText(sendGetRequest("http://192.168.0.13:8080/SupCrowdFunder/resources/index"));
-	    JSONObject obj= sendGetRequest("http://192.168.0.13:8080/SupCrowdFunder/resources/index");
-
-	    List<String> list = new ArrayList<String>();
+		listViewProjects = (ListView) this.findViewById(R.id.listViewProjects);
+		
+	    JSONObject obj = sendGetRequest("http://192.168.0.11:8080/SupCrowdFunder/resources/index");
+	    
+	    
+	    ArrayList<String> list = new ArrayList<String>();
 	    JSONArray array;
 		try {
 			array = obj.getJSONArray("project");
@@ -52,11 +54,9 @@ public class MainActivity extends Activity {
 			e.printStackTrace();
 		}
 		
-		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getBaseContext(), R.layout.listViewProjects, list);
-
-		System.out.println("lol");
-		System.out.println(list);
-
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, list);
+		listViewProjects.setAdapter(adapter);
 	    
 	}
 	
