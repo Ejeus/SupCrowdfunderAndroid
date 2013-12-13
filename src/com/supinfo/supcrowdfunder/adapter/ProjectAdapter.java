@@ -44,14 +44,19 @@ public class ProjectAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		TextView textView = new TextView(context);
 		textView.setTextColor(Color.WHITE);
+		Integer currentFunding = projects.get(position).getCurrentFunding();
+		Integer goal = projects.get(position).getGoal();
+		float percentage  = (currentFunding/goal)*100;
+		String strTmp = projects.get(position).getName() + " -- " + percentage + "%";
 		textView.setTextSize(18);
 		textView.setPadding(0, 0, 0, 30);
-		textView.setText(projects.get(position).getName());
+		textView.setText(strTmp);
 		if(position%2 == 0)
 			textView.setBackgroundColor(Color.DKGRAY);
 		else
 			textView.setBackgroundColor(Color.BLACK);
 		return textView;
+		
 	}
 
 }

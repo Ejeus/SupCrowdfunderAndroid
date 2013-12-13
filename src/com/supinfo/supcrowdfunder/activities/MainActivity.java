@@ -55,16 +55,17 @@ public class MainActivity extends Activity {
 			array = obj.getJSONArray("project");
 		    for(int i = 0 ; i < array.length() ; i++){
 		    	projectTmp = new Project();
+		    	projectTmp.setGoal(Integer.parseInt(array.getJSONObject(i).getString("goal")));
+		    	projectTmp.setCurrentFunding(Integer.parseInt(array.getJSONObject(i).getString("currentFunding")));
 		    	projectTmp.setName(array.getJSONObject(i).getString("name"));
+		    	projectTmp.setContent(array.getJSONObject(i).getString("content"));
 		    	projects.add(projectTmp);
 		    }
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//array.getJSONObject(i).getString("name");
-		
+
 		/*ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, list);
 		listViewProjects.setAdapter(adapter);*/
 		
