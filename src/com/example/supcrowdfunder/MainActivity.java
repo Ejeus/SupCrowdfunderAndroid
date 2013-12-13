@@ -1,6 +1,7 @@
 package com.example.supcrowdfunder;
 
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.net.URI;
 import java.util.ArrayList;
@@ -15,15 +16,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.supinfo.supcrowdfunder.activities.ProjectDetails;
 import com.supinfo.supcrowdfunder.entity.Project;
 
+import android.R;
+import android.R.id;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class MainActivity extends Activity {
 	
@@ -32,7 +40,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_list_item);
 		
 		Project project = new Project();
 		
@@ -55,6 +63,15 @@ public class MainActivity extends Activity {
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, list);
 		listViewProjects.setAdapter(adapter);
+		
+		listViewProjects.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Intent intent = new Intent(MainActivity.this, ProjectDetails.class);
+				startActivityForResult(intent, 0);
+			}
+		});
 	    
 	}
 	
