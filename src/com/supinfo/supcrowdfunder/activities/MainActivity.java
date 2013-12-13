@@ -22,6 +22,7 @@ import com.supinfo.supcrowdfunder.adapter.ProjectAdapter;
 import com.supinfo.supcrowdfunder.entity.Project;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
@@ -37,6 +38,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class MainActivity extends Activity {
 	
 	private ListView listViewProjects;
+	final ArrayList<Project> projects = new ArrayList<Project>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +49,6 @@ public class MainActivity extends Activity {
 		
 	    JSONObject obj = sendGetRequest("http://192.168.1.10:8080/SupCrowdFunder/resources/index");
 	    
-	    
-	    ArrayList<Project> projects = new ArrayList<Project>();
 	    
 	    Project projectTmp = new Project();
 	    JSONArray array;
@@ -78,6 +78,9 @@ public class MainActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				Intent intent = new Intent(MainActivity.this, ProjectDetails.class);
+				
+				intent.putExtra("projectName",projects.get(arg2).getName());
+				
 				startActivityForResult(intent, 0);
 			}
 		});
