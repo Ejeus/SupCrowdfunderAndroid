@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 
 import com.supinfo.supcrowdfunder.R;
+import com.supinfo.supcrowdfunder.adapter.ProjectAdapter;
 import com.supinfo.supcrowdfunder.entity.Project;
 
 import android.os.Bundle;
@@ -41,28 +42,34 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		Project project = new Project();
-		
 		listViewProjects = (ListView) this.findViewById(R.id.listViewProjects);
 		
 	    JSONObject obj = sendGetRequest("http://192.168.0.13:8080/SupCrowdFunder/resources/index");
 	    
 	    
-	    ArrayList<String> list = new ArrayList<String>();
+	    ArrayList<Project> projects = new ArrayList<Project>();
+	    
+	    Project projectTmp = new Project();
 	    JSONArray array;
 		try {
 			array = obj.getJSONArray("project");
 		    for(int i = 0 ; i < array.length() ; i++){
-		        list.add(array.getJSONObject(i).getString("name"));
+		    	projectTmp = new Project();
+		    	projectTmp.setName(array.getJSONObject(i).getString("name"));
+		    	projects.add(projectTmp);
 		    }
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		//array.getJSONObject(i).getString("name");
 		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, list);
-		listViewProjects.setAdapter(adapter);
+		/*ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, list);
+		listViewProjects.setAdapter(adapter);*/
+		
+		ProjectAdapter adapterProject = new ProjectAdapter(this, projects);
+		listViewProjects.setAdapter(adapterProject);
 		
 		listViewProjects.setOnItemClickListener(new OnItemClickListener() {
 			@Override
