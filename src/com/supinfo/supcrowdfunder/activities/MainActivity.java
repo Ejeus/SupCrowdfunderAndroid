@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
 		
 		listViewProjects = (ListView) this.findViewById(R.id.listViewProjects);
 		
-	    JSONObject obj = sendGetRequest("http://192.168.0.13:8080/SupCrowdFunder/resources/index");
+	    JSONObject obj = sendGetRequest("http://192.168.0.48:8080/SupCrowdFunder/resources/index");
 	    
 	    
 	    ArrayList<String> list = new ArrayList<String>();
