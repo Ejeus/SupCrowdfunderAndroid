@@ -79,6 +79,10 @@ public class MainActivity extends Activity {
 				Intent intent = new Intent(MainActivity.this, ProjectDetails.class);
 				
 				intent.putExtra("projectName",projects.get(arg2).getName());
+				intent.putExtra("projectContent",projects.get(arg2).getContent());
+				intent.putExtra("projectCreatedAt",projects.get(arg2).getCreatedAt());
+				intent.putExtra("projectCurrentFunding",projects.get(arg2).getCurrentFunding());
+				intent.putExtra("projectGoal",projects.get(arg2).getGoal());
 				
 				startActivityForResult(intent, 0);
 			}

@@ -18,11 +18,25 @@ public class ProjectDetails extends Activity {
 		Bundle extras = getIntent().getExtras();
 
 		
-		TextView t=new TextView(this); 
-
-	    t=(TextView)findViewById(R.id.projectName); 
-	    
-	    t.setText(extras.getString("projectName"));
+		TextView projectName=new TextView(this); 
+		projectName=(TextView)findViewById(R.id.projectName); 
+		projectName.setText(extras.getString("projectName"));
+		
+		TextView projectContent=new TextView(this); 
+		projectContent=(TextView)findViewById(R.id.projectContent); 
+		projectContent.setText(extras.getString("projectContent"));
+		
+		TextView projectCreatedAt=new TextView(this); 
+		projectCreatedAt=(TextView)findViewById(R.id.projectCreatedAt); 
+		projectCreatedAt.setText(extras.getString("projectCreatedAt"));
+		
+		TextView projectCurrentFunding=new TextView(this); 
+		projectCurrentFunding=(TextView)findViewById(R.id.projectCurrentFunding); 
+		projectCurrentFunding.setText(extras.getString("projectCurrentFunding"));
+		
+		TextView projectGoal=new TextView(this); 
+		projectGoal=(TextView)findViewById(R.id.projectGoal); 
+		projectGoal.setText(extras.getString("projectGoal"));
 
 		
 		

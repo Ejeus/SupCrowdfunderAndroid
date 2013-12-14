@@ -9,10 +9,29 @@
     tools:context=".ProjectDetails" >
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" 
         android:id = "@+id/projectName"/>
+    
+     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id = "@+id/projectContent"/>
+     
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id = "@+id/projectCreatedAt"/>
+      
+       <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id = "@+id/projectCurrentFunding"/>
+       
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id = "@+id/projectGoal"/>
   
 
 </RelativeLayout>
