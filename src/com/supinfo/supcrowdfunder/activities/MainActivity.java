@@ -128,6 +128,10 @@ public class MainActivity extends Activity {
 	        	Intent intent = new Intent(this, LoginActivity.class);
 	        	startActivityForResult(intent, 0);
 	            return true;
+	        case R.id.register:
+	        	Intent i = new Intent(this, RegisterActivity.class);
+	        	startActivityForResult(i, 0);
+	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
