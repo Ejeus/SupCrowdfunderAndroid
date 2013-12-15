@@ -35,6 +35,7 @@ import com.supinfo.supcrowdfunder.R;
 import com.supinfo.supcrowdfunder.activities.DrawerItem.DrawerItemType;
 import com.supinfo.supcrowdfunder.adapter.DrawerItemAdapter;
 import com.supinfo.supcrowdfunder.adapter.ProjectAdapter;
+import com.supinfo.supcrowdfunder.dao.DaoFactory;
 import com.supinfo.supcrowdfunder.entity.Project;
 import com.supinfo.supcrowdfunder.entity.User;
 
@@ -75,16 +76,14 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		    User userTmp = new User();
 		    for(int i = 0 ; i < array.length() ; i++){
 		    	projectTmp = new Project();
-		    	userTmp = new User();
 		    	projectTmp.setGoal(Integer.parseInt(array.getJSONObject(i).getString("goal")));
 		    	projectTmp.setCurrentFunding(Integer.parseInt(array.getJSONObject(i).getString("currentFunding")));
 		    	projectTmp.setName(array.getJSONObject(i).getString("name"));
 		    	projectTmp.setContent(array.getJSONObject(i).getString("content"));
 
-		    	userTmp.setFirstName("Firstname");
-		    	userTmp.setLastName("Lastname");
+		    	User user = DaoFactory.getUserDao().parse(array.getJSONObject(i).getJSONObject("creator"));
+		    	projectTmp.setCreator(user);
 
-		    	projectTmp.setCreator(userTmp);
 		    	
 		    	projects.add(projectTmp);
 		    }

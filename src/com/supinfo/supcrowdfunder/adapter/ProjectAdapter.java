@@ -47,7 +47,7 @@ public class ProjectAdapter extends BaseAdapter {
 		Integer currentFunding = projects.get(position).getCurrentFunding();
 		Integer goal = projects.get(position).getGoal();
 		float percentage  = (currentFunding/goal)*100;
-		String strTmp = projects.get(position).getName() + " -- " + percentage + "%";
+		String strTmp = projects.get(position).getName() + " -- " + percentage + "% - " + projects.get(position).getCreator().getFullName();
 		textView.setTextSize(18);
 		textView.setPadding(0, 0, 0, 30);
 		textView.setText(strTmp);

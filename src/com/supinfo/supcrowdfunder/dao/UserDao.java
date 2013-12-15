@@ -82,7 +82,7 @@ public class UserDao {
 		return user;
 	}
 	
-	private User parse(JSONObject jsonResult) {
+	public User parse(JSONObject jsonResult) {
 		User user = new User();
 		
 		try {
