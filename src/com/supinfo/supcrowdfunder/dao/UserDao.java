@@ -50,6 +50,37 @@ public class UserDao {
 		return user;
 	}
 	
+	public User registerUser(User user) {		
+		try {
+			HttpClient httpClient = new DefaultHttpClient();
+			HttpPost httpPost = new HttpPost();
+			
+			URI uri = new URI("http://192.168.0.11:8080/SupCrowdFunder/resources/register");
+			httpPost.setURI(uri);
+			
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("email", user.getEmail());
+			jsonObject.put("firstName", user.getFirstName());
+			jsonObject.put("lastName", user.getLastName());
+			jsonObject.put("password", user.getPassword());
+			
+			StringEntity se = new StringEntity( jsonObject.toString());
+			se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+			httpPost.setEntity(se);
+			
+			HttpResponse response = httpClient.execute(httpPost);
+			String result = EntityUtils.toString(response.getEntity());
+			
+			JSONObject jsonResult = new JSONObject(result);
+			return parse(jsonResult);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return user;
+	}
+	
 	private User parse(JSONObject jsonResult) {
 		User user = new User();
 		

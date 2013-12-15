@@ -3,13 +3,17 @@ package com.supinfo.supcrowdfunder.activities;
 import com.supinfo.supcrowdfunder.R;
 import com.supinfo.supcrowdfunder.R.layout;
 import com.supinfo.supcrowdfunder.R.menu;
+import com.supinfo.supcrowdfunder.dao.DaoFactory;
+import com.supinfo.supcrowdfunder.entity.User;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RegisterActivity extends Activity {
 
@@ -62,7 +66,29 @@ public class RegisterActivity extends Activity {
 		mPassword = mPasswordView.getText().toString();
 		mPasswordConfirm = mPasswordConfirmView.getText().toString();
 		
-		System.out.println(mEmail);
+		if(mPassword.equals(mPasswordConfirm)) {
+			User user = new User();
+			user.setEmail(mEmail);
+			user.setFirstName(mFirstName);
+			user.setLastName(mLastName);
+			user.setPassword(mPassword);
+			
+			user = DaoFactory.getUserDao().registerUser(user);
+			
+			if(user != null) {
+				SupCrowdFunderApp app = (SupCrowdFunderApp) getApplication();
+				app.setUser(user);
+				finish();
+			}
+			else {
+				Toast toast = Toast.makeText(this, "An error happened. Please recheck your informations.", 500);
+				toast.show();
+			}
+		}
+		else {
+			Toast toast = Toast.makeText(this, "Your password doesn't match password confirmation.", 500);
+			toast.show();
+		}
 	}
 
 }
