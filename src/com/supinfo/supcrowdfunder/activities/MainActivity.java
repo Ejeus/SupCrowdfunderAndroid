@@ -21,28 +21,44 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.supinfo.supcrowdfunder.R;
+import com.supinfo.supcrowdfunder.activities.DrawerItem.DrawerItemType;
+import com.supinfo.supcrowdfunder.adapter.DrawerItemAdapter;
 import com.supinfo.supcrowdfunder.adapter.ProjectAdapter;
 import com.supinfo.supcrowdfunder.entity.Project;
 import com.supinfo.supcrowdfunder.entity.User;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnItemClickListener {
 	
 	private ListView listViewProjects;
 	final ArrayList<Project> projects = new ArrayList<Project>();
+	
+	private DrawerLayout mDrawerLayout;
+	private ListView mDrawerList;
+	private ArrayList<DrawerItem> drawerItems;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        
+        initDrawerItems();
+        
+        mDrawerList.setAdapter(new DrawerItemAdapter(this, drawerItems));
+        mDrawerList.setOnItemClickListener(this);
 		
 		
 		listViewProjects = (ListView) this.findViewById(R.id.listViewProjects);
@@ -61,13 +77,13 @@ public class MainActivity extends Activity {
 		    	projectTmp = new Project();
 		    	userTmp = new User();
 		    	projectTmp.setGoal(Integer.parseInt(array.getJSONObject(i).getString("goal")));
-		    	projectTmp.setCurrentFunding(Integer.parseInt(array.getJSONObject(i).getString("currentFunding")));
+		    	//projectTmp.setCurrentFunding(Integer.parseInt(array.getJSONObject(i).getString("currentFunding")));
 		    	projectTmp.setName(array.getJSONObject(i).getString("name"));
 		    	projectTmp.setContent(array.getJSONObject(i).getString("content"));
-		    	
+
 		    	userTmp.setFirstName("Firstname");
 		    	userTmp.setLastName("Lastname");
-		    	
+
 		    	projectTmp.setCreator(userTmp);
 		    	
 		    	projects.add(projectTmp);
@@ -76,7 +92,7 @@ public class MainActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		ProjectAdapter adapterProject = new ProjectAdapter(this, projects);
 		listViewProjects.setAdapter(adapterProject);
 		
@@ -123,62 +139,74 @@ public class MainActivity extends Activity {
 	}
 	
 	
-	@SuppressLint("NewApi")
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 		
-		invalidateOptionsMenu();
+		updateDrawerMenu();
+	}
+	
+	public void updateDrawerMenu() {
+		initDrawerItems();
+		DrawerItemAdapter adapter = (DrawerItemAdapter) mDrawerList.getAdapter();
+		adapter.notifyDataSetChanged();
 	}
 
-
-	
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		menu.clear();
+	public void initDrawerItems(){
+		if(drawerItems == null)
+			drawerItems = new ArrayList<DrawerItem>();
+		else
+			drawerItems.removeAll(drawerItems);
+		
 		
 		SupCrowdFunderApp app = (SupCrowdFunderApp) getApplication();
 		User user = app.getUser();
 		
 		
 		if(user == null) {
-			getMenuInflater().inflate(R.menu.main, menu);
+			drawerItems.add(new DrawerItem(DrawerItemType.DrawerItemTypeLogin, "Login"));
+			drawerItems.add(new DrawerItem(DrawerItemType.DrawerItemTypeRegister, "Register"));
 		}
 		else {
-			getMenuInflater().inflate(R.menu.logged_in, menu);
+			drawerItems.add(new DrawerItem(DrawerItemType.DrawerItemTypeMyProfile, user.getFullName()));
+			drawerItems.add(new DrawerItem(DrawerItemType.DrawerItemTypeLogout, "Logout"));
 		}
 		
-		return true;
+		drawerItems.add(new DrawerItem(DrawerItemType.DrawerItemTypeCategories, "Categories"));
 	}
-	
-	@SuppressLint("NewApi")
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    // Handle presses on the action bar items
-	    switch (item.getItemId()) {
-	        case R.id.login:
-	        	Intent intent = new Intent(this, LoginActivity.class);
+
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int index, long id) {
+		DrawerItem drawerItem = drawerItems.get(index);
+		
+		switch (drawerItem.getIdentifier()) {
+			case DrawerItemTypeLogin:
+				Intent intent = new Intent(this, LoginActivity.class);
 	        	startActivityForResult(intent, 0);
-	            return true;
-	        case R.id.register:
-	        	Intent i = new Intent(this, RegisterActivity.class);
+				break;
+			case DrawerItemTypeRegister:
+				Intent i = new Intent(this, RegisterActivity.class);
 	        	startActivityForResult(i, 0);
-	            return true;
-	        case R.id.my_profile:
-	        	Intent profileIntent = new Intent(this, ProfileActivity.class);
+	            break;
+			case DrawerItemTypeMyProfile:
+				Intent profileIntent = new Intent(this, ProfileActivity.class);
 	        	startActivityForResult(profileIntent, 0);
-	            return true;
-	        case R.id.logout:
-	        	SupCrowdFunderApp app = (SupCrowdFunderApp) getApplication();
+	        	break;
+			case DrawerItemTypeLogout:
+				SupCrowdFunderApp app = (SupCrowdFunderApp) getApplication();
 	        	app.logout();
 	        	
-	        	invalidateOptionsMenu();
-	        	return true;
-	        default:
-	            return super.onOptionsItemSelected(item);
-	    }
+	        	updateDrawerMenu();
+	        	break;
+			case DrawerItemTypeCategories:
+				Intent categoryIntent = new Intent(this, CategoryActivity.class);
+				startActivityForResult(categoryIntent, 0);
+	            break;
+			default:
+				break;
+			}
+			
 	}
 
 }

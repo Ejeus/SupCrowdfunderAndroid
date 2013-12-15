@@ -7,5 +7,7 @@
     <string name="title_activity_project_details">Project Details</string>
     <string name="title_activity_register">Register</string>
     <string name="title_activity_profile">My Profile</string>
+    <string name="title_activity_category">CategoryActivity</string>
+    <string name="title_activity_category_detail">CategoryDetailActivity</string>
 
 </resources>
