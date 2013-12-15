@@ -5,30 +5,44 @@
     android:orientation="vertical"
     tools:context=".ProjectDetails" >
 
+     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Title : "/>
+    
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id = "@+id/projectName"/>
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Description : "/>
     
      <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id = "@+id/projectContent"/>
      
-      <TextView
+     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id = "@+id/projectCreatedAt"/>
-      
-       <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id = "@+id/projectCurrentFunding"/>
-       
-        <TextView
+        android:text="Goal : "/>
+     
+     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id = "@+id/projectGoal"/>
-  
+     
+     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Current Funding : "/>
+    
+     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id = "@+id/projectCurrentFunding"/>
 
 </LinearLayout>
