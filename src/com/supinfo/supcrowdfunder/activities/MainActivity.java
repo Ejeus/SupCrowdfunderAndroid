@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
 		
 		listViewProjects = (ListView) this.findViewById(R.id.listViewProjects);
 		
-	    JSONObject obj = sendGetRequest("http://192.168.0.13:8080/SupCrowdFunder/resources/index");
+	    JSONObject obj = sendGetRequest("http://192.168.1.13:8080/SupCrowdFunder/resources/index");
 	    
 	    
 	    Project projectTmp = new Project();
@@ -79,8 +79,8 @@ public class MainActivity extends Activity {
 				intent.putExtra("projectName",projects.get(arg2).getName());
 				intent.putExtra("projectContent",projects.get(arg2).getContent());
 				intent.putExtra("projectCreatedAt",projects.get(arg2).getCreatedAt());
-				intent.putExtra("projectCurrentFunding",projects.get(arg2).getCurrentFunding());
-				intent.putExtra("projectGoal",projects.get(arg2).getGoal());
+				intent.putExtra("projectCurrentFunding",Integer.toString(projects.get(arg2).getCurrentFunding()));
+				intent.putExtra("projectGoal",Integer.toString(projects.get(arg2).getGoal()));
 				
 				startActivityForResult(intent, 0);
 			}
