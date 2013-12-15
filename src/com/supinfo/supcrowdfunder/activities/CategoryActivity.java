@@ -42,7 +42,7 @@ public class CategoryActivity extends Activity {
 		setContentView(R.layout.activity_category);
 		
 		listViewCategories = (ListView) this.findViewById(R.id.listViewCategories);
-		JSONObject obj = sendGetRequest("http://192.168.1.10:8080/SupCrowdFunder/resources/categories");
+		JSONObject obj = sendGetRequest(SupCrowdFunderApp.getAppURL() + "/SupCrowdFunder/resources/categories");
 		
 		Category categoryTmp = new Category();
 	    JSONArray array;
@@ -61,22 +61,19 @@ public class CategoryActivity extends Activity {
 		CategoryAdapter adapterCategory = new CategoryAdapter(this, categories);
 		listViewCategories.setAdapter(adapterCategory);
 		
-		/*
-		listViewProjects.setOnItemClickListener(new OnItemClickListener() {
+		
+		listViewCategories.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Intent intent = new Intent(MainActivity.this, ProjectDetails.class);
+				Intent intent = new Intent(CategoryActivity.this, CategoryDetailActivity.class);
 				
-				intent.putExtra("projectName",projects.get(arg2).getName());
-				intent.putExtra("projectContent",projects.get(arg2).getContent());
-				intent.putExtra("projectCreatedAt",projects.get(arg2).getCreatedAt());
-				intent.putExtra("projectCurrentFunding",projects.get(arg2).getCurrentFunding());
-				intent.putExtra("projectGoal",projects.get(arg2).getGoal());
+				intent.putExtra("categoryName", categories.get(arg2).getName());
+				intent.putExtra("categoryId", categories.get(arg2).getId());
 				
 				startActivityForResult(intent, 0);
 			}
-		});*/
+		});
 	}
 
 	@Override

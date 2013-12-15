@@ -46,6 +46,10 @@
             android:name="com.supinfo.supcrowdfunder.activities.CategoryActivity"
             android:label="@string/title_activity_category" >
         </activity>
+        <activity
+            android:name="com.supinfo.supcrowdfunder.activities.CategoryDetailActivity"
+            android:label="@string/title_activity_category_detail" >
+        </activity>
     </application>
 
 </manifest>
