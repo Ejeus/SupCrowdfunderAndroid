@@ -12,8 +12,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -105,7 +108,15 @@ public class MainActivity extends Activity {
 	}
 	
 	
-	
+	@SuppressLint("NewApi")
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		Log.d("EVENT", "onActivityResult");
+		invalidateOptionsMenu();
+	}
 
 
 	
@@ -113,7 +124,19 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		menu.clear();
+		
+		SupCrowdFunderApp app = (SupCrowdFunderApp) getApplication();
+		User user = app.getUser();
+		
+		
+		if(user == null) {
+			getMenuInflater().inflate(R.menu.main, menu);
+		}
+		else {
+			getMenuInflater().inflate(R.menu.logged_in, menu);
+		}
+		
 		return true;
 	}
 	
