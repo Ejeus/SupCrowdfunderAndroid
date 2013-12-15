@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
 		
 		listViewProjects = (ListView) this.findViewById(R.id.listViewProjects);
 		
-	    JSONObject obj = sendGetRequest("http://192.168.0.11:8080/SupCrowdFunder/resources/index");
+	    JSONObject obj = sendGetRequest("http://192.168.1.10:8080/SupCrowdFunder/resources/index");
 	    
 	    
 	    Project projectTmp = new Project();
@@ -161,6 +161,12 @@ public class MainActivity extends Activity {
 	        	Intent profileIntent = new Intent(this, ProfileActivity.class);
 	        	startActivityForResult(profileIntent, 0);
 	            return true;
+	            
+	        case R.id.categories:
+	        	Intent categoryIntent = new Intent(this, CategoryActivity.class);
+	        	startActivityForResult(categoryIntent, 0);
+	            return true;
+	            
 	        case R.id.logout:
 	        	SupCrowdFunderApp app = (SupCrowdFunderApp) getApplication();
 	        	app.logout();
