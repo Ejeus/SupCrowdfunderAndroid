@@ -12,6 +12,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
+import com.supinfo.supcrowdfunder.activities.SupCrowdFunderApp;
 import com.supinfo.supcrowdfunder.entity.User;
 
 public class UserDao {
@@ -26,7 +27,7 @@ public class UserDao {
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpPost httpPost = new HttpPost();
 			
-			URI uri = new URI("http://192.168.0.11:8080/SupCrowdFunder/resources/login");
+			URI uri = new URI(SupCrowdFunderApp.getAppURL() + "/SupCrowdFunder/resources/login");
 			httpPost.setURI(uri);
 			
 			JSONObject jsonObject = new JSONObject();
@@ -55,7 +56,7 @@ public class UserDao {
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpPost httpPost = new HttpPost();
 			
-			URI uri = new URI("http://192.168.0.11:8080/SupCrowdFunder/resources/register");
+			URI uri = new URI(SupCrowdFunderApp.getAppURL() + "/SupCrowdFunder/resources/register");
 			httpPost.setURI(uri);
 			
 			JSONObject jsonObject = new JSONObject();

@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
 		
 		listViewProjects = (ListView) this.findViewById(R.id.listViewProjects);
 
-	    JSONObject obj = sendGetRequest("http://192.168.1.13:8080/SupCrowdFunder/resources/index");
+	    JSONObject obj = sendGetRequest(SupCrowdFunderApp.getAppURL() + "/SupCrowdFunder/resources/index");
 
 	    
 	    
