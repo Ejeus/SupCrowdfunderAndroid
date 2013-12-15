@@ -34,6 +34,10 @@ public class ProjectDetails extends Activity {
 		TextView projectCurrentFunding=new TextView(this); 
 		projectCurrentFunding=(TextView)findViewById(R.id.projectCurrentFunding); 
 		projectCurrentFunding.setText(extras.getString("projectCurrentFunding"));
+		
+		TextView projectCreator=new TextView(this); 
+		projectCreator=(TextView)findViewById(R.id.projectCreator); 
+		projectCreator.setText(extras.getString("projectCreatorFirstname"));
 		/*
 		TextView projectCreatedAt=new TextView(this); 
 		projectCreatedAt=(TextView)findViewById(R.id.projectCreatedAt); 
