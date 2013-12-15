@@ -1,5 +1,6 @@
 package com.supinfo.supcrowdfunder.activities;
 
+import java.lang.reflect.Array;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
@@ -67,11 +68,12 @@ public class MainActivity extends Activity implements OnItemClickListener {
 
 	    
 	    
-	    Project projectTmp = new Project();
-	    User userTmp = new User();
+
 	    JSONArray array;
 		try {
 			array = obj.getJSONArray("project");
+		    Project projectTmp = new Project();
+		    User userTmp = new User();
 		    for(int i = 0 ; i < array.length() ; i++){
 		    	projectTmp = new Project();
 		    	projectTmp.setGoal(Integer.parseInt(array.getJSONObject(i).getString("goal")));
@@ -81,6 +83,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 
 		    	User user = DaoFactory.getUserDao().parse(array.getJSONObject(i).getJSONObject("creator"));
 		    	projectTmp.setCreator(user);
+
 		    	
 		    	projects.add(projectTmp);
 		    }
@@ -104,6 +107,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 				intent.putExtra("projectCurrentFunding",Integer.toString(projects.get(arg2).getCurrentFunding()));
 				intent.putExtra("projectGoal",Integer.toString(projects.get(arg2).getGoal()));
 				intent.putExtra("projectCreatorFirstname", projects.get(arg2).getCreator().getFirstName());
+				intent.putExtra("projectCreatorLastname", projects.get(arg2).getCreator().getLastName());
 				
 				startActivityForResult(intent, 0);
 			}
