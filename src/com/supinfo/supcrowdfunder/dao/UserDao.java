@@ -12,6 +12,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
+import com.supinfo.supcrowdfunder.activities.SupCrowdFunderApp;
 import com.supinfo.supcrowdfunder.entity.User;
 
 public class UserDao {
@@ -26,12 +27,43 @@ public class UserDao {
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpPost httpPost = new HttpPost();
 			
-			URI uri = new URI("http://192.168.0.11:8080/SupCrowdFunder/resources/login");
+			URI uri = new URI(SupCrowdFunderApp.getAppURL() + "/SupCrowdFunder/resources/login");
 			httpPost.setURI(uri);
 			
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("email", email);
 			jsonObject.put("password", password);
+			
+			StringEntity se = new StringEntity( jsonObject.toString());
+			se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+			httpPost.setEntity(se);
+			
+			HttpResponse response = httpClient.execute(httpPost);
+			String result = EntityUtils.toString(response.getEntity());
+			
+			JSONObject jsonResult = new JSONObject(result);
+			return parse(jsonResult);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return user;
+	}
+	
+	public User registerUser(User user) {		
+		try {
+			HttpClient httpClient = new DefaultHttpClient();
+			HttpPost httpPost = new HttpPost();
+			
+			URI uri = new URI(SupCrowdFunderApp.getAppURL() + "/SupCrowdFunder/resources/register");
+			httpPost.setURI(uri);
+			
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("email", user.getEmail());
+			jsonObject.put("firstName", user.getFirstName());
+			jsonObject.put("lastName", user.getLastName());
+			jsonObject.put("password", user.getPassword());
 			
 			StringEntity se = new StringEntity( jsonObject.toString());
 			se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));

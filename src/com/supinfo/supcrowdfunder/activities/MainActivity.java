@@ -45,20 +45,25 @@ public class MainActivity extends Activity {
 		
 		
 		listViewProjects = (ListView) this.findViewById(R.id.listViewProjects);
-		
-	    JSONObject obj = sendGetRequest("http://192.168.1.10:8080/SupCrowdFunder/resources/index");
+
+	    JSONObject obj = sendGetRequest(SupCrowdFunderApp.getAppURL() + "/SupCrowdFunder/resources/index");
+
 	    
 	    
 	    Project projectTmp = new Project();
+	    User userTmp = new User();
 	    JSONArray array;
 		try {
 			array = obj.getJSONArray("project");
 		    for(int i = 0 ; i < array.length() ; i++){
 		    	projectTmp = new Project();
+		    	userTmp = new User();
 		    	projectTmp.setGoal(Integer.parseInt(array.getJSONObject(i).getString("goal")));
 		    	projectTmp.setCurrentFunding(Integer.parseInt(array.getJSONObject(i).getString("currentFunding")));
 		    	projectTmp.setName(array.getJSONObject(i).getString("name"));
 		    	projectTmp.setContent(array.getJSONObject(i).getString("content"));
+		    	userTmp.setFirstName(array.getJSONObject(i).getJSONObject("creator").getString("firstname"));
+		    	projectTmp.setCreator(userTmp);
 		    	
 		    	projects.add(projectTmp);
 		    }
@@ -82,8 +87,9 @@ public class MainActivity extends Activity {
 				intent.putExtra("projectName",projects.get(arg2).getName());
 				intent.putExtra("projectContent",projects.get(arg2).getContent());
 				intent.putExtra("projectCreatedAt",projects.get(arg2).getCreatedAt());
-				intent.putExtra("projectCurrentFunding",projects.get(arg2).getCurrentFunding());
-				intent.putExtra("projectGoal",projects.get(arg2).getGoal());
+				intent.putExtra("projectCurrentFunding",Integer.toString(projects.get(arg2).getCurrentFunding()));
+				intent.putExtra("projectGoal",Integer.toString(projects.get(arg2).getGoal()));
+				intent.putExtra("projectCreatorFirstname", projects.get(arg2).getCreator().getFirstName());
 				
 				startActivityForResult(intent, 0);
 			}
