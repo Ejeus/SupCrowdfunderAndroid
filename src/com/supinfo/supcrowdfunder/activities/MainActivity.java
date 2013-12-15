@@ -14,8 +14,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -42,8 +45,9 @@ public class MainActivity extends Activity {
 		
 		
 		listViewProjects = (ListView) this.findViewById(R.id.listViewProjects);
-		
+
 	    JSONObject obj = sendGetRequest("http://192.168.1.13:8080/SupCrowdFunder/resources/index");
+
 	    
 	    
 	    Project projectTmp = new Project();
@@ -111,7 +115,14 @@ public class MainActivity extends Activity {
 	}
 	
 	
-	
+	@SuppressLint("NewApi")
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		invalidateOptionsMenu();
+	}
 
 
 	
@@ -119,10 +130,23 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		menu.clear();
+		
+		SupCrowdFunderApp app = (SupCrowdFunderApp) getApplication();
+		User user = app.getUser();
+		
+		
+		if(user == null) {
+			getMenuInflater().inflate(R.menu.main, menu);
+		}
+		else {
+			getMenuInflater().inflate(R.menu.logged_in, menu);
+		}
+		
 		return true;
 	}
 	
+	@SuppressLint("NewApi")
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
 	    switch (item.getItemId()) {
@@ -134,6 +158,16 @@ public class MainActivity extends Activity {
 	        	Intent i = new Intent(this, RegisterActivity.class);
 	        	startActivityForResult(i, 0);
 	            return true;
+	        case R.id.my_profile:
+	        	Intent profileIntent = new Intent(this, ProfileActivity.class);
+	        	startActivityForResult(profileIntent, 0);
+	            return true;
+	        case R.id.logout:
+	        	SupCrowdFunderApp app = (SupCrowdFunderApp) getApplication();
+	        	app.logout();
+	        	
+	        	invalidateOptionsMenu();
+	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }

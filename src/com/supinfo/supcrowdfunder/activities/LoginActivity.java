@@ -1,5 +1,7 @@
 package com.supinfo.supcrowdfunder.activities;
 
+import org.json.JSONObject;
+
 import com.supinfo.supcrowdfunder.R;
 import com.supinfo.supcrowdfunder.R.id;
 import com.supinfo.supcrowdfunder.R.layout;
@@ -12,10 +14,14 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.telephony.gsm.GsmCellLocation;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -120,7 +126,7 @@ public class LoginActivity extends Activity {
 			mPasswordView.setError(getString(R.string.error_field_required));
 			focusView = mPasswordView;
 			cancel = true;
-		} else if (mPassword.length() < 4) {
+		} else if (mPassword.length() < 1) {
 			mPasswordView.setError(getString(R.string.error_invalid_password));
 			focusView = mPasswordView;
 			cancel = true;
@@ -201,7 +207,14 @@ public class LoginActivity extends Activity {
 		protected Boolean doInBackground(Void... params) {
 			User user = DaoFactory.getUserDao().getUserWithEmailAndPassword(mEmail, mPassword);
 			
-			return (user != null);
+			if(user != null) {
+				SupCrowdFunderApp app = (SupCrowdFunderApp) getApplication();
+				app.setUser(user);
+				
+				return true;
+			}
+			
+			return false;
 		}
 
 		@Override
