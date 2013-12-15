@@ -60,17 +60,7 @@ public class CategoryDetailActivity extends Activity {
 		    Project projectTmp = new Project();
 		    User userTmp = new User();
 		    for(int i = 0 ; i < array.length() ; i++){
-		    	projectTmp = new Project();
-		    	projectTmp.setGoal(Integer.parseInt(array.getJSONObject(i).getString("goal")));
-		    	projectTmp.setCurrentFunding(Integer.parseInt(array.getJSONObject(i).getString("currentFunding")));
-		    	projectTmp.setName(array.getJSONObject(i).getString("name"));
-		    	projectTmp.setContent(array.getJSONObject(i).getString("content"));
-
-		    	User user = DaoFactory.getUserDao().parse(array.getJSONObject(i).getJSONObject("creator"));
-		    	projectTmp.setCreator(user);
-
-		    	
-		    	projects.add(projectTmp);
+		    	projects.add(DaoFactory.getProjectDao().parse(array.getJSONObject(i)));
 		    }
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
