@@ -24,4 +24,8 @@ public class SupCrowdFunderApp extends Application {
 		this.user = null;
 	}
 
+	static public String getAppURL(){
+		return "http://192.168.0.11:8080";
+	}
+	
 }
