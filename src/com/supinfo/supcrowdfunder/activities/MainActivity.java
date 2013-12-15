@@ -157,6 +157,10 @@ public class MainActivity extends Activity {
 	        	Intent i = new Intent(this, RegisterActivity.class);
 	        	startActivityForResult(i, 0);
 	            return true;
+	        case R.id.my_profile:
+	        	Intent profileIntent = new Intent(this, ProfileActivity.class);
+	        	startActivityForResult(profileIntent, 0);
+	            return true;
 	        case R.id.logout:
 	        	SupCrowdFunderApp app = (SupCrowdFunderApp) getApplication();
 	        	app.logout();
