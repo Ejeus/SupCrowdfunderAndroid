@@ -4,7 +4,7 @@ reated by http://gitignore.io
 # built application files
 *.apk
 *.ap_
-*.java.orig*
+
 # files for the dex VM
 *.dex
 

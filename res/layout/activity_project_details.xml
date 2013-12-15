@@ -44,5 +44,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id = "@+id/projectCurrentFunding"/>
+     
+     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Creator : "/>
+    
+     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id = "@+id/projectCreator"/>
 
 </LinearLayout>

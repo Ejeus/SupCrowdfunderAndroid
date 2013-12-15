@@ -194,8 +194,8 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	        	updateDrawerMenu();
 	        	break;
 			case DrawerItemTypeCategories:
-				//Intent categoryIntent = new Intent(this, CategoryActivity.class);
-				//startActivityForResult(categoryIntent, 0);
+				Intent categoryIntent = new Intent(this, CategoryActivity.class);
+				startActivityForResult(categoryIntent, 0);
 	            break;
 			default:
 				break;
