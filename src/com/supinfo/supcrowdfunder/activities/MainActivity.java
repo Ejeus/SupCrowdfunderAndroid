@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -47,7 +48,7 @@ public class MainActivity extends Activity {
 		
 		listViewProjects = (ListView) this.findViewById(R.id.listViewProjects);
 		
-	    JSONObject obj = sendGetRequest("http://192.168.1.10:8080/SupCrowdFunder/resources/index");
+	    JSONObject obj = sendGetRequest("http://192.168.0.13:8080/SupCrowdFunder/resources/index");
 	    
 	    
 	    Project projectTmp = new Project();
@@ -60,6 +61,7 @@ public class MainActivity extends Activity {
 		    	projectTmp.setCurrentFunding(Integer.parseInt(array.getJSONObject(i).getString("currentFunding")));
 		    	projectTmp.setName(array.getJSONObject(i).getString("name"));
 		    	projectTmp.setContent(array.getJSONObject(i).getString("content"));
+		    	
 		    	projects.add(projectTmp);
 		    }
 		} catch (JSONException e) {

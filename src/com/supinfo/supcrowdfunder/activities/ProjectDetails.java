@@ -25,11 +25,11 @@ public class ProjectDetails extends Activity {
 		TextView projectContent=new TextView(this); 
 		projectContent=(TextView)findViewById(R.id.projectContent); 
 		projectContent.setText(extras.getString("projectContent"));
-		
+		/*
 		TextView projectCreatedAt=new TextView(this); 
 		projectCreatedAt=(TextView)findViewById(R.id.projectCreatedAt); 
 		projectCreatedAt.setText(extras.getString("projectCreatedAt"));
-		
+		*/
 		TextView projectCurrentFunding=new TextView(this); 
 		projectCurrentFunding=(TextView)findViewById(R.id.projectCurrentFunding); 
 		projectCurrentFunding.setText(extras.getString("projectCurrentFunding"));
