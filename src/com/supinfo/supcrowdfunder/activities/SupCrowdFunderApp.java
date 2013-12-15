@@ -19,5 +19,9 @@ public class SupCrowdFunderApp extends Application {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public void logout() {
+		this.user = null;
+	}
 
 }

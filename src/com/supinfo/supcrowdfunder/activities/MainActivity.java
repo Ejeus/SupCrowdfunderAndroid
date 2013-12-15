@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
 		
 		listViewProjects = (ListView) this.findViewById(R.id.listViewProjects);
 		
-	    JSONObject obj = sendGetRequest("http://192.168.0.13:8080/SupCrowdFunder/resources/index");
+	    JSONObject obj = sendGetRequest("http://192.168.0.11:8080/SupCrowdFunder/resources/index");
 	    
 	    
 	    Project projectTmp = new Project();
@@ -120,7 +120,6 @@ public class MainActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 		
-		Log.d("EVENT", "onActivityResult");
 		invalidateOptionsMenu();
 	}
 
@@ -146,6 +145,7 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
+	@SuppressLint("NewApi")
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
 	    switch (item.getItemId()) {
@@ -157,6 +157,12 @@ public class MainActivity extends Activity {
 	        	Intent i = new Intent(this, RegisterActivity.class);
 	        	startActivityForResult(i, 0);
 	            return true;
+	        case R.id.logout:
+	        	SupCrowdFunderApp app = (SupCrowdFunderApp) getApplication();
+	        	app.logout();
+	        	
+	        	invalidateOptionsMenu();
+	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
