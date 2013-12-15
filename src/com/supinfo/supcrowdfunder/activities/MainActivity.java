@@ -77,7 +77,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		    	projectTmp = new Project();
 		    	userTmp = new User();
 		    	projectTmp.setGoal(Integer.parseInt(array.getJSONObject(i).getString("goal")));
-		    	//projectTmp.setCurrentFunding(Integer.parseInt(array.getJSONObject(i).getString("currentFunding")));
+		    	projectTmp.setCurrentFunding(Integer.parseInt(array.getJSONObject(i).getString("currentFunding")));
 		    	projectTmp.setName(array.getJSONObject(i).getString("name"));
 		    	projectTmp.setContent(array.getJSONObject(i).getString("content"));
 
