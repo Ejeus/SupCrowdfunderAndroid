@@ -75,7 +75,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		    Project projectTmp = new Project();
 		    User userTmp = new User();
 		    for(int i = 0 ; i < array.length() ; i++){
-		    	projectTmp = new Project();
+		    	/*projectTmp = new Project();
 		    	projectTmp.setGoal(Integer.parseInt(array.getJSONObject(i).getString("goal")));
 		    	projectTmp.setCurrentFunding(Integer.parseInt(array.getJSONObject(i).getString("currentFunding")));
 		    	projectTmp.setName(array.getJSONObject(i).getString("name"));
@@ -85,7 +85,9 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		    	projectTmp.setCreator(user);
 
 		    	
-		    	projects.add(projectTmp);
+		    	projects.add(projectTmp);*/
+		    	
+		    	projects.add(DaoFactory.getProjectDao().parse(array.getJSONObject(i)));
 		    }
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

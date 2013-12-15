@@ -6,4 +6,8 @@ public class DaoFactory {
 	public static UserDao getUserDao() {
 		return new UserDao();
 	}
+	
+	public static ProjectDao getProjectDao() {
+		return new ProjectDao();
+	}
 }
