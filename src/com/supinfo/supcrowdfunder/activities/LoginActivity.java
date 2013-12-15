@@ -5,6 +5,8 @@ import com.supinfo.supcrowdfunder.R.id;
 import com.supinfo.supcrowdfunder.R.layout;
 import com.supinfo.supcrowdfunder.R.menu;
 import com.supinfo.supcrowdfunder.R.string;
+import com.supinfo.supcrowdfunder.dao.DaoFactory;
+import com.supinfo.supcrowdfunder.entity.User;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -26,13 +28,6 @@ import android.widget.TextView;
  * well.
  */
 public class LoginActivity extends Activity {
-	/**
-	 * A dummy authentication store containing known user names and passwords.
-	 * TODO: remove after connecting to a real authentication system.
-	 */
-	private static final String[] DUMMY_CREDENTIALS = new String[] {
-			"foo@example.com:hello", "bar@example.com:world" };
-
 	/**
 	 * The default email to populate the email field with.
 	 */
@@ -202,27 +197,11 @@ public class LoginActivity extends Activity {
 	 * the user.
 	 */
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-		@Override
+		@Override 
 		protected Boolean doInBackground(Void... params) {
-			// TODO: attempt authentication against a network service.
-
-			try {
-				// Simulate network access.
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				return false;
-			}
-
-			for (String credential : DUMMY_CREDENTIALS) {
-				String[] pieces = credential.split(":");
-				if (pieces[0].equals(mEmail)) {
-					// Account exists, return true if the password matches.
-					return pieces[1].equals(mPassword);
-				}
-			}
-
-			// TODO: register the new account here.
-			return true;
+			User user = DaoFactory.getUserDao().getUserWithEmailAndPassword(mEmail, mPassword);
+			
+			return (user != null);
 		}
 
 		@Override

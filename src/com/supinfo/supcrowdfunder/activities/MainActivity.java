@@ -1,11 +1,7 @@
 package com.supinfo.supcrowdfunder.activities;
 
-import java.io.PrintWriter;
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -16,24 +12,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
-import com.supinfo.supcrowdfunder.R;
-import com.supinfo.supcrowdfunder.adapter.ProjectAdapter;
-import com.supinfo.supcrowdfunder.entity.Project;
-
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+import com.supinfo.supcrowdfunder.R;
+import com.supinfo.supcrowdfunder.adapter.ProjectAdapter;
+import com.supinfo.supcrowdfunder.dao.DaoFactory;
+import com.supinfo.supcrowdfunder.entity.Project;
+import com.supinfo.supcrowdfunder.entity.User;
 
 public class MainActivity extends Activity {
 	
@@ -45,10 +39,11 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		
 		listViewProjects = (ListView) this.findViewById(R.id.listViewProjects);
 		
-	    JSONObject obj = sendGetRequest("http://192.168.1.10:8080/SupCrowdFunder/resources/index");
-	    
+	    JSONObject obj = sendGetRequest("http://192.168.0.11:8080/SupCrowdFunder/resources/index");
+	    	    	    
 	    
 	    Project projectTmp = new Project();
 	    JSONArray array;
@@ -108,6 +103,7 @@ public class MainActivity extends Activity {
 			
 	  return myObject;
 	}
+	
 	
 	
 
