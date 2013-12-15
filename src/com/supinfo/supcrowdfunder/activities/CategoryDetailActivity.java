@@ -17,16 +17,21 @@ import com.supinfo.supcrowdfunder.R.layout;
 import com.supinfo.supcrowdfunder.R.menu;
 import com.supinfo.supcrowdfunder.adapter.CategoryAdapter;
 import com.supinfo.supcrowdfunder.adapter.ProjectAdapter;
+import com.supinfo.supcrowdfunder.dao.DaoFactory;
 import com.supinfo.supcrowdfunder.entity.Category;
 import com.supinfo.supcrowdfunder.entity.Project;
 import com.supinfo.supcrowdfunder.entity.User;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class CategoryDetailActivity extends Activity {
 	
@@ -49,24 +54,21 @@ public class CategoryDetailActivity extends Activity {
 		
 	    JSONObject obj = sendGetRequest(SupCrowdFunderApp.getAppURL() + "/SupCrowdFunder/resources/categories/"+extras.getLong("categoryId")+"/projects");
 
-	    
-	    
-	    Project projectTmp = new Project();
-	    User userTmp = new User();
 	    JSONArray array;
-	    
 		try {
 			array = obj.getJSONArray("project");
+		    Project projectTmp = new Project();
+		    User userTmp = new User();
 		    for(int i = 0 ; i < array.length() ; i++){
 		    	projectTmp = new Project();
-		    	userTmp = new User();
-		    	System.out.println(array.getJSONObject(i).getString("name"));
 		    	projectTmp.setGoal(Integer.parseInt(array.getJSONObject(i).getString("goal")));
 		    	projectTmp.setCurrentFunding(Integer.parseInt(array.getJSONObject(i).getString("currentFunding")));
 		    	projectTmp.setName(array.getJSONObject(i).getString("name"));
 		    	projectTmp.setContent(array.getJSONObject(i).getString("content"));
-		    	userTmp.setFirstName(array.getJSONObject(i).getJSONObject("creator").getString("firstname"));
-		    	projectTmp.setCreator(userTmp);
+
+		    	User user = DaoFactory.getUserDao().parse(array.getJSONObject(i).getJSONObject("creator"));
+		    	projectTmp.setCreator(user);
+
 		    	
 		    	projects.add(projectTmp);
 		    }
@@ -75,9 +77,26 @@ public class CategoryDetailActivity extends Activity {
 			e.printStackTrace();
 		}
 
-		
 		ProjectAdapter adapterProject = new ProjectAdapter(this, projects);
 		listViewProjects.setAdapter(adapterProject);
+		
+		listViewProjects.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Intent intent = new Intent(CategoryDetailActivity.this, ProjectDetails.class);
+				
+				intent.putExtra("projectName",projects.get(arg2).getName());
+				intent.putExtra("projectContent",projects.get(arg2).getContent());
+				intent.putExtra("projectCreatedAt",projects.get(arg2).getCreatedAt());
+				intent.putExtra("projectCurrentFunding",Integer.toString(projects.get(arg2).getCurrentFunding()));
+				intent.putExtra("projectGoal",Integer.toString(projects.get(arg2).getGoal()));
+				intent.putExtra("projectCreatorFirstname", projects.get(arg2).getCreator().getFirstName());
+				intent.putExtra("projectCreatorLastname", projects.get(arg2).getCreator().getLastName());
+				
+				startActivityForResult(intent, 0);
+			}
+		});
 		
 	}
 
