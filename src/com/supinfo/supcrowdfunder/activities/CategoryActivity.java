@@ -51,6 +51,7 @@ public class CategoryActivity extends Activity {
 		    for(int i = 0 ; i < array.length() ; i++){
 		    	categoryTmp = new Category();
 		    	categoryTmp.setName(array.getJSONObject(i).getString("name"));
+		    	categoryTmp.setId(array.getJSONObject(i).getLong("id"));
 		    	categories.add(categoryTmp);
 		    }
 		} catch (JSONException e) {
@@ -70,7 +71,7 @@ public class CategoryActivity extends Activity {
 				
 				intent.putExtra("categoryName", categories.get(arg2).getName());
 				intent.putExtra("categoryId", categories.get(arg2).getId());
-				
+			
 				startActivityForResult(intent, 0);
 			}
 		});
