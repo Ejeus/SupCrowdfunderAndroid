@@ -2,6 +2,8 @@ package com.supinfo.supcrowdfunder.activities;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -28,7 +30,6 @@ import android.widget.ListView;
 
 import com.supinfo.supcrowdfunder.R;
 import com.supinfo.supcrowdfunder.adapter.ProjectAdapter;
-import com.supinfo.supcrowdfunder.dao.DaoFactory;
 import com.supinfo.supcrowdfunder.entity.Project;
 import com.supinfo.supcrowdfunder.entity.User;
 
@@ -45,8 +46,8 @@ public class MainActivity extends Activity {
 		
 		listViewProjects = (ListView) this.findViewById(R.id.listViewProjects);
 		
-	    JSONObject obj = sendGetRequest("http://192.168.0.11:8080/SupCrowdFunder/resources/index");
-	    	    	    
+	    JSONObject obj = sendGetRequest("http://192.168.0.13:8080/SupCrowdFunder/resources/index");
+	    
 	    
 	    Project projectTmp = new Project();
 	    JSONArray array;
@@ -58,6 +59,7 @@ public class MainActivity extends Activity {
 		    	projectTmp.setCurrentFunding(Integer.parseInt(array.getJSONObject(i).getString("currentFunding")));
 		    	projectTmp.setName(array.getJSONObject(i).getString("name"));
 		    	projectTmp.setContent(array.getJSONObject(i).getString("content"));
+		    	
 		    	projects.add(projectTmp);
 		    }
 		} catch (JSONException e) {
@@ -78,6 +80,10 @@ public class MainActivity extends Activity {
 				Intent intent = new Intent(MainActivity.this, ProjectDetails.class);
 				
 				intent.putExtra("projectName",projects.get(arg2).getName());
+				intent.putExtra("projectContent",projects.get(arg2).getContent());
+				intent.putExtra("projectCreatedAt",projects.get(arg2).getCreatedAt());
+				intent.putExtra("projectCurrentFunding",projects.get(arg2).getCurrentFunding());
+				intent.putExtra("projectGoal",projects.get(arg2).getGoal());
 				
 				startActivityForResult(intent, 0);
 			}
