@@ -1,5 +1,6 @@
 package com.supinfo.supcrowdfunder.activities;
 
+import java.lang.reflect.Array;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,11 +51,12 @@ public class MainActivity extends Activity {
 
 	    
 	    
-	    Project projectTmp = new Project();
-	    User userTmp = new User();
+
 	    JSONArray array;
 		try {
 			array = obj.getJSONArray("project");
+		    Project projectTmp = new Project();
+		    User userTmp = new User();
 		    for(int i = 0 ; i < array.length() ; i++){
 		    	projectTmp = new Project();
 		    	userTmp = new User();
@@ -62,7 +64,10 @@ public class MainActivity extends Activity {
 		    	projectTmp.setCurrentFunding(Integer.parseInt(array.getJSONObject(i).getString("currentFunding")));
 		    	projectTmp.setName(array.getJSONObject(i).getString("name"));
 		    	projectTmp.setContent(array.getJSONObject(i).getString("content"));
-		    	userTmp.setFirstName(array.getJSONObject(i).getJSONObject("creator").getString("firstname"));
+		    	
+		    	userTmp.setFirstName("Firstname");
+		    	userTmp.setLastName("Lastname");
+		    	
 		    	projectTmp.setCreator(userTmp);
 		    	
 		    	projects.add(projectTmp);
@@ -71,9 +76,6 @@ public class MainActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		/*ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, list);
-		listViewProjects.setAdapter(adapter);*/
 		
 		ProjectAdapter adapterProject = new ProjectAdapter(this, projects);
 		listViewProjects.setAdapter(adapterProject);
@@ -90,6 +92,7 @@ public class MainActivity extends Activity {
 				intent.putExtra("projectCurrentFunding",Integer.toString(projects.get(arg2).getCurrentFunding()));
 				intent.putExtra("projectGoal",Integer.toString(projects.get(arg2).getGoal()));
 				intent.putExtra("projectCreatorFirstname", projects.get(arg2).getCreator().getFirstName());
+				intent.putExtra("projectCreatorLastname", projects.get(arg2).getCreator().getLastName());
 				
 				startActivityForResult(intent, 0);
 			}
