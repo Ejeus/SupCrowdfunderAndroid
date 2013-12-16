@@ -37,7 +37,7 @@ public class ProjectDetails extends Activity {
 		
 		TextView projectCreator=new TextView(this); 
 		projectCreator=(TextView)findViewById(R.id.projectCreator); 
-		projectCreator.setText(extras.getString("projectCreatorFirstname") + extras.getString("projectCreatorLastname"));
+		projectCreator.setText(extras.getString("projectCreatorFirstname") + " " + extras.getString("projectCreatorLastname"));
 		/*
 		TextView projectCreatedAt=new TextView(this); 
 		projectCreatedAt=(TextView)findViewById(R.id.projectCreatedAt); 
