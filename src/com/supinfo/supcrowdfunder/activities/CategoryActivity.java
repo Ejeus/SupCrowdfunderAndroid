@@ -1,6 +1,7 @@
 package com.supinfo.supcrowdfunder.activities;
 import com.supinfo.supcrowdfunder.adapter.CategoryAdapter;
 import com.supinfo.supcrowdfunder.adapter.ProjectAdapter;
+import com.supinfo.supcrowdfunder.dao.DaoFactory;
 import com.supinfo.supcrowdfunder.entity.Category;
 import com.supinfo.supcrowdfunder.entity.Project;
 
@@ -30,6 +31,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import com.supinfo.supcrowdfunder.dao.DaoFactory;
 
 public class CategoryActivity extends Activity {
 
@@ -44,15 +46,12 @@ public class CategoryActivity extends Activity {
 		listViewCategories = (ListView) this.findViewById(R.id.listViewCategories);
 		JSONObject obj = sendGetRequest(SupCrowdFunderApp.getAppURL() + "/SupCrowdFunder/resources/categories");
 		
-		Category categoryTmp = new Category();
 	    JSONArray array;
+	    
 		try {
 			array = obj.getJSONArray("category");
 		    for(int i = 0 ; i < array.length() ; i++){
-		    	categoryTmp = new Category();
-		    	categoryTmp.setName(array.getJSONObject(i).getString("name"));
-		    	categoryTmp.setId(array.getJSONObject(i).getLong("id"));
-		    	categories.add(categoryTmp);
+		    	categories.add(DaoFactory.getCategoryDao().parse(array.getJSONObject(i)));
 		    }
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

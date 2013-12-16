@@ -10,4 +10,8 @@ public class DaoFactory {
 	public static ProjectDao getProjectDao() {
 		return new ProjectDao();
 	}
+	
+	public static CategoryDao getCategoryDao() {
+		return new CategoryDao();
+	}
 }
