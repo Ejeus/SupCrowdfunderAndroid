@@ -50,6 +50,10 @@
             android:name="com.supinfo.supcrowdfunder.activities.CategoryDetailActivity"
             android:label="@string/title_activity_category_detail" >
         </activity>
+        <activity
+            android:name="com.supinfo.supcrowdfunder.activities.EditProfileActivity"
+            android:label="@string/title_activity_edit_profile" >
+        </activity>
     </application>
 
 </manifest>
