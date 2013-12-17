@@ -48,7 +48,6 @@ public class ProjectAdapter extends BaseAdapter {
 		float percentage  = (currentFunding/goal)*100;
 		String strTmp = projects.get(position).getName() + " \n" + projects.get(position).getCreator().getFullName() +"\n"+ percentage + "%" ;
 		
-		
 		TextView textView = new TextView(context);
 		textView.setTextColor(Color.WHITE);
 		textView.setTextSize(18);
@@ -56,9 +55,9 @@ public class ProjectAdapter extends BaseAdapter {
 		
 		textView.setText(strTmp);
 		if(position%2 == 0)
-			textView.setBackgroundColor(Color.parseColor("#E74C3C"));
+			textView.setBackgroundColor(Color.parseColor("#3498DB"));
 		else
-			textView.setBackgroundColor(Color.parseColor("#C0392B"));
+			textView.setBackgroundColor(Color.parseColor("#2980B9"));
 		return textView;
 		
 	}

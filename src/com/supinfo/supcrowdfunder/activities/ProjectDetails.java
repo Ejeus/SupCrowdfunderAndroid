@@ -22,12 +22,12 @@ public class ProjectDetails extends Activity {
 		
 		TextView projectName=new TextView(this); 
 		projectName=(TextView)findViewById(R.id.projectName); 
-		projectName.setTextColor(Color.parseColor("#C0392B"));
+		projectName.setTextColor(Color.parseColor("#3498DB"));
 		projectName.setText(extras.getString("projectName"));
 		
 		TextView projectContent=new TextView(this); 
 		projectContent=(TextView)findViewById(R.id.projectContent);
-		projectContent.setTextColor(Color.parseColor("#E74C3C"));
+		projectContent.setTextColor(Color.parseColor("#2980B9"));
 		projectContent.setText(extras.getString("projectContent"));
 		
 		TextView projectCategoryName=new TextView(this); 
