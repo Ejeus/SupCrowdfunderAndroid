@@ -6,6 +6,7 @@ import com.supinfo.supcrowdfunder.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.Menu;
 import android.widget.TextView;
 
@@ -21,28 +22,32 @@ public class ProjectDetails extends Activity {
 		
 		TextView projectName=new TextView(this); 
 		projectName=(TextView)findViewById(R.id.projectName); 
+		projectName.setTextColor(Color.parseColor("#C0392B"));
 		projectName.setText(extras.getString("projectName"));
 		
 		TextView projectContent=new TextView(this); 
-		projectContent=(TextView)findViewById(R.id.projectContent); 
+		projectContent=(TextView)findViewById(R.id.projectContent);
+		projectContent.setTextColor(Color.parseColor("#E74C3C"));
 		projectContent.setText(extras.getString("projectContent"));
 		
-		TextView projectGoal=new TextView(this); 
-		projectGoal=(TextView)findViewById(R.id.projectGoal); 
-		projectGoal.setText(extras.getString("projectGoal"));
-		
-		TextView projectCurrentFunding=new TextView(this); 
-		projectCurrentFunding=(TextView)findViewById(R.id.projectCurrentFunding); 
-		projectCurrentFunding.setText(extras.getString("projectCurrentFunding"));
+		TextView projectCategoryName=new TextView(this); 
+		projectCategoryName=(TextView)findViewById(R.id.projectCategoryName); 
+		projectCategoryName.setTextColor(Color.parseColor("#BDC3C7"));
+		projectCategoryName.setText(extras.getString("projectCategoryName"));
 		
 		TextView projectCreator=new TextView(this); 
 		projectCreator=(TextView)findViewById(R.id.projectCreator); 
+		projectCreator.setTextColor(Color.parseColor("#BDC3C7"));
 		projectCreator.setText(extras.getString("projectCreatorFirstname") + " " + extras.getString("projectCreatorLastname"));
-		/*
-		TextView projectCreatedAt=new TextView(this); 
-		projectCreatedAt=(TextView)findViewById(R.id.projectCreatedAt); 
-		projectCreatedAt.setText(extras.getString("projectCreatedAt"));
-		*/
+		
+		TextView projectGoal=new TextView(this); 
+		projectGoal=(TextView)findViewById(R.id.projectGoal); 
+		projectGoal.setText("Objectif : " + extras.getString("projectGoal") + " Û ");
+		
+		TextView projectCurrentFunding=new TextView(this); 
+		projectCurrentFunding=(TextView)findViewById(R.id.projectCurrentFunding); 
+		projectCurrentFunding.setText("Avancement : " +extras.getString("projectCurrentFunding") + " Û ");
+		
 
 		
 		

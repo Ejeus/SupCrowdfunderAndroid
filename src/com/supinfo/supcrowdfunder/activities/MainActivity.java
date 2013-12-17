@@ -86,6 +86,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 				intent.putExtra("projectGoal",Integer.toString(projects.get(arg2).getGoal()));
 				intent.putExtra("projectCreatorFirstname", projects.get(arg2).getCreator().getFirstName());
 				intent.putExtra("projectCreatorLastname", projects.get(arg2).getCreator().getLastName());
+				intent.putExtra("projectCategoryName", projects.get(arg2).getCategory().getName());
 				
 				startActivityForResult(intent, 0);
 			}

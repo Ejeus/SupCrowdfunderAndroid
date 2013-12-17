@@ -53,9 +53,9 @@ public class ProjectAdapter extends BaseAdapter {
 		textView.setPadding(0, 0, 0, 30);
 		textView.setText(strTmp);
 		if(position%2 == 0)
-			textView.setBackgroundColor(Color.DKGRAY);
+			textView.setBackgroundColor(Color.parseColor("#E74C3C"));
 		else
-			textView.setBackgroundColor(Color.BLACK);
+			textView.setBackgroundColor(Color.parseColor("#C0392B"));
 		return textView;
 		
 	}

@@ -4,76 +4,52 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ProjectDetails" 
-    android:paddingLeft="10sp">
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp">
 
-     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_marginTop="10sp"
-        android:text="Title "/>
-    
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:textSize="30sp"
+        android:textAlignment="center"
         android:id = "@+id/projectName"/>
     
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_marginTop="10sp"
-        android:text="Description "/>
-    
-     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:textSize="20sp"
+        android:layout_marginTop="20sp"
+        android:textStyle="italic"
         android:id = "@+id/projectContent"/>
-     
-     <TextView
+    
+      <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_marginTop="10sp"
-        android:text="Goal "/>
+        android:textSize="15sp"
+        android:gravity="right"
+        android:textStyle="italic"
+        android:id = "@+id/projectCategoryName"/>
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:gravity="right"
+        android:id = "@+id/projectCreator"/>
+    
      
      <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25sp"
+        android:paddingTop="30sp"
         android:id = "@+id/projectGoal"/>
-     
-     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_marginTop="10sp"
-        android:text="Current Funding "/>
+
     
      <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:id = "@+id/projectCurrentFunding"/>
-     
-     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_marginTop="10sp"
-        android:text="Creator "/>
     
-     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:id = "@+id/projectCreator"/>
 
 </LinearLayout>
