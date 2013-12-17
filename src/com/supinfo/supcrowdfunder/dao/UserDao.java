@@ -82,6 +82,40 @@ public class UserDao {
 		return user;
 	}
 	
+	public User updateUser(User user) {		
+		try {
+			HttpClient httpClient = new DefaultHttpClient();
+			HttpPost httpPost = new HttpPost();
+			
+			URI uri = new URI(SupCrowdFunderApp.getAppURL() + "/SupCrowdFunder/resources/editProfile");
+			httpPost.setURI(uri);
+			
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id", user.getId());
+			jsonObject.put("email", user.getEmail());
+			jsonObject.put("firstName", user.getFirstName());
+			jsonObject.put("lastName", user.getLastName());
+			jsonObject.put("password", user.getPassword());
+			
+			StringEntity se = new StringEntity( jsonObject.toString());
+			se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+			httpPost.setEntity(se);
+			
+			HttpResponse response = httpClient.execute(httpPost);
+			String result = EntityUtils.toString(response.getEntity());
+			
+			JSONObject jsonResult = new JSONObject(result);
+			return parse(jsonResult);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	
+	
 	public User parse(JSONObject jsonResult) {
 		User user = new User();
 		
@@ -90,6 +124,7 @@ public class UserDao {
 			user.setFirstName(jsonResult.getString("firstName"));
 			user.setLastName(jsonResult.getString("lastName"));
 			user.setId(jsonResult.getLong("id"));
+			user.setPassword(jsonResult.getString("password"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

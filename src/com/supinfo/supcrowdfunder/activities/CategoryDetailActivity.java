@@ -53,20 +53,17 @@ public class CategoryDetailActivity extends Activity {
 		
 		
 	    JSONObject obj = sendGetRequest(SupCrowdFunderApp.getAppURL() + "/SupCrowdFunder/resources/categories/"+extras.getLong("categoryId")+"/projects");
-
+	   
 	    JSONArray array;
 		try {
 			array = obj.getJSONArray("project");
-		    Project projectTmp = new Project();
-		    User userTmp = new User();
 		    for(int i = 0 ; i < array.length() ; i++){
 		    	projects.add(DaoFactory.getProjectDao().parse(array.getJSONObject(i)));
 		    }
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 		ProjectAdapter adapterProject = new ProjectAdapter(this, projects);
 		listViewProjects.setAdapter(adapterProject);
 		

@@ -1,10 +1,7 @@
 package com.supinfo.supcrowdfunder.activities;
 
-import java.lang.reflect.Array;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -15,20 +12,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.supinfo.supcrowdfunder.R;
@@ -76,7 +67,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		    	projects.add(DaoFactory.getProjectDao().parse(array.getJSONObject(i)));
 		    }
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -156,6 +146,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		}
 		else {
 			drawerItems.add(new DrawerItem(DrawerItemType.DrawerItemTypeMyProfile, user.getFullName()));
+			drawerItems.add(new DrawerItem(DrawerItemType.DrawerItemTypeEditProfile, "Edit my profile"));
 			drawerItems.add(new DrawerItem(DrawerItemType.DrawerItemTypeLogout, "Logout"));
 		}
 		
@@ -180,6 +171,10 @@ public class MainActivity extends Activity implements OnItemClickListener {
 				Intent profileIntent = new Intent(this, ProfileActivity.class);
 	        	startActivityForResult(profileIntent, 0);
 	        	break;
+			case DrawerItemTypeEditProfile:
+				Intent editProfileIntent = new Intent(this, EditProfileActivity.class);
+	        	startActivityForResult(editProfileIntent, 0);
+				break;
 			case DrawerItemTypeLogout:
 				SupCrowdFunderApp app = (SupCrowdFunderApp) getApplication();
 	        	app.logout();

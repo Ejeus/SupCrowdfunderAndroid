@@ -6,7 +6,8 @@ public class DrawerItem {
 		DrawerItemTypeLogout,
 		DrawerItemTypeRegister,
 		DrawerItemTypeMyProfile,
-		DrawerItemTypeCategories
+		DrawerItemTypeCategories,
+		DrawerItemTypeEditProfile
 	}
 	
 	private DrawerItemType identifier;
