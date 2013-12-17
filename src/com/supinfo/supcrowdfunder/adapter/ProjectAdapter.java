@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -42,15 +43,17 @@ public class ProjectAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		TextView textView = new TextView(context);
-		textView.setTextColor(Color.WHITE);
-		Project project = projects.get(position);
 		float currentFunding = projects.get(position).getCurrentFunding();
 		float goal = projects.get(position).getGoal();
 		float percentage  = (currentFunding/goal)*100;
-		String strTmp = projects.get(position).getName() + " -- " + percentage + "% - " + projects.get(position).getCreator().getFullName();
+		String strTmp = projects.get(position).getName() + " \n" + projects.get(position).getCreator().getFullName() +"\n"+ percentage + "%" ;
+		
+		
+		TextView textView = new TextView(context);
+		textView.setTextColor(Color.WHITE);
 		textView.setTextSize(18);
-		textView.setPadding(0, 0, 0, 30);
+		textView.setPadding(30, 30, 30, 30);
+		
 		textView.setText(strTmp);
 		if(position%2 == 0)
 			textView.setBackgroundColor(Color.parseColor("#E74C3C"));
