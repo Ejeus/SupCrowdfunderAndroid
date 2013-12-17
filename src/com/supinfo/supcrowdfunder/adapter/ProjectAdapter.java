@@ -44,8 +44,9 @@ public class ProjectAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		TextView textView = new TextView(context);
 		textView.setTextColor(Color.WHITE);
-		Integer currentFunding = projects.get(position).getCurrentFunding();
-		Integer goal = projects.get(position).getGoal();
+		Project project = projects.get(position);
+		float currentFunding = projects.get(position).getCurrentFunding();
+		float goal = projects.get(position).getGoal();
 		float percentage  = (currentFunding/goal)*100;
 		String strTmp = projects.get(position).getName() + " -- " + percentage + "% - " + projects.get(position).getCreator().getFullName();
 		textView.setTextSize(18);
